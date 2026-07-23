@@ -3,8 +3,8 @@
 > Session state, refreshed at every milestone end. The human's batch-review artifact. Read this at the start of every session.
 
 ## Current state
-- **Status:** PR #4 was accidentally merged after the M1 Verifier FAIL. The explicitly approved line-ending repair is built and self-verified on `milestone/M1-format-repair`; its independent repair gate is pending.
-- **Next action:** open the M1 corrective PR and run a fresh independent Forge Verifier before considering M1 complete or starting M2.
+- **Status:** PR #4 was accidentally merged after the initial M1 Verifier FAIL. Corrective PR #5 has now received an independent **PASS** with no notes or blockers.
+- **Next action (human):** merge PR #5. Then tell Codex it is merged so M2 can start from the corrected `main`.
 - **Run plan:** Run A = M0–M7 + M10 (the learning app + packaging). Run B = M8–M9 (delight layer), started only after Run A ships.
 - **Suggested first run length:** "build through M2, then stop" — watch the loop + Verifier behave before letting it run further.
 
@@ -21,7 +21,7 @@
 _(none yet)_
 
 ## Open blockers
-- **M1 repair gate pending (2026-07-23):** the original FAIL was traced to `.gitattributes` allowing CRLF checkout materialization under `core.autocrlf=true`. The approved repair enforces LF for tracked text. Builder verification is green; a fresh independent gate is still required.
+_(none)_
 
 ## Milestone log
 - **M0 Bootstrap — independent Verifier PASS; human-approved and merged (2026-07-23).**
@@ -40,8 +40,9 @@ _(none yet)_
   - Asset integrity: all 164 curriculum mappings resolve; `src/data/lessons.ts` and `public/audio/**` remain unchanged.
   - Security/debt: npm audit reports zero vulnerabilities; no `forge-debt` markers; cumulative debt remains zero.
   - Independent gate: **FAIL** because a fresh Windows checkout fails `npm run format:check` on CRLF-materialized unchanged files. All M1 functional criteria passed. No repair was attempted after the verdict.
-- **M1 deterministic line-ending repair — builder PASS; independent repair gate pending (2026-07-23).**
+- **M1 deterministic line-ending repair — independent Verifier PASS (2026-07-23).**
   - Branch: `milestone/M1-format-repair`, created from the accidentally merged PR #4 commit; local Forge guard PASS.
   - Scope: `.gitattributes` only now enforces `eol=lf` for detected text files. No application code, dependency, curriculum, audio asset, secret, or security configuration changed.
   - Battery: aggregate `npm run verify` PASS — build, lint, format check, 7 unit tests, and 3 Playwright tests. npm audit and guard PASS. Captured in `verification-shots/M1-repair/`.
   - Debt: none.
+  - Independent gate: **PASS**, no notes or blocking findings. A fresh clone at exact repair commit `da060872e2800f4bf038cb4695e419991ad71a36` with `core.autocrlf=true` materialized tracked text as LF and passed the full battery. Exact report: `verification-shots/M1-repair/verifier-gate-report.md`.
