@@ -10,7 +10,7 @@
 | UI | **React 18 + Vite** | Fast, simple, huge ecosystem; reuses v1's mental model |
 | Styling | **Tailwind CSS** + a few shadcn/ui primitives | Kid-friendly styling fast; reused from v1 |
 | Routing | **React Router** | Simple client-side screens |
-| Native shell | **Capacitor 6** | Wraps the web app into a real installable Android APK; keeps iOS open for later |
+| Native shell | **Capacitor 8** | Wraps the web app into a real installable Android APK; keeps iOS open for later |
 | Local storage | **Capacitor Preferences** (with a thin wrapper) | Robust on-device persistence in the WebView; replaces raw `localStorage` |
 | Audio | Bundled **MP3 files** played via HTML5 `Audio` | Offline, zero runtime cost — the core design decision |
 | Unit tests | **Vitest** | Fast, Vite-native |
@@ -28,7 +28,7 @@ src/
 ├── main.tsx                 # app entry
 ├── App.tsx                  # router + top-level layout
 ├── data/
-│   └── lessons.ts           # REUSED from v1 — the curriculum (10 lessons, ~86 words) + helpers
+│   └── lessons.ts           # REUSED from v1 — the curriculum (10 lessons, 82 words) + helpers
 ├── audio/
 │   └── player.ts            # slugify(text) -> /audio/{af|en}/{slug}.mp3 ; play/stop; single-source-of-truth
 ├── storage/
@@ -48,8 +48,8 @@ src/
 
 public/
 └── audio/
-    ├── af/                  # REUSED — 86 Afrikaans MP3s (edge-tts af-ZA)
-    └── en/                  # REUSED — 84 English MP3s (edge-tts en-ZA)
+    ├── af/                  # REUSED — 82 Afrikaans MP3s (edge-tts af-ZA)
+    └── en/                  # REUSED — 82 English MP3s (edge-tts en-ZA)
 
 android/                     # Capacitor-generated native project (built/opened in Android Studio on YOUR machine)
 ```

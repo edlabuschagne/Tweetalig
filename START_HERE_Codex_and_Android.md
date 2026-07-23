@@ -15,7 +15,7 @@ The shape of the whole thing: **Codex builds the web app in the cloud → gives 
    - the whole `docs/` folder
 3. Bring across the two **reused assets from v1** (this is the valuable part we're keeping):
    - `src/data/lessons.ts` — the curriculum
-   - `public/audio/af/` and `public/audio/en/` — the 170 MP3 files
+   - `public/audio/af/` and `public/audio/en/` — the 164 MP3 files
    *(Codex will scaffold the rest of the app around these in Milestone 0. You don't need to copy anything else from v1.)*
 4. Commit and push.
 5. This private repository uses GitHub Free, so server-side rulesets are not enforced. Activate the committed local Forge guard once per clone:
