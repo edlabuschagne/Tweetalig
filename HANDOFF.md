@@ -3,8 +3,8 @@
 > Session state, refreshed at every milestone end. The human's batch-review artifact. Read this at the start of every session.
 
 ## Current state
-- **Status:** Milestone 0 was human-approved and merged. Milestone 1’s independent Verifier returned **FAIL** on PR #4; the run is stopped.
-- **Next action (human):** do not merge PR #4. Review the line-ending blocker below and explicitly authorize a repair attempt if desired.
+- **Status:** PR #4 was accidentally merged after the M1 Verifier FAIL. The explicitly approved line-ending repair is built and self-verified on `milestone/M1-format-repair`; its independent repair gate is pending.
+- **Next action:** open the M1 corrective PR and run a fresh independent Forge Verifier before considering M1 complete or starting M2.
 - **Run plan:** Run A = M0–M7 + M10 (the learning app + packaging). Run B = M8–M9 (delight layer), started only after Run A ships.
 - **Suggested first run length:** "build through M2, then stop" — watch the loop + Verifier behave before letting it run further.
 
@@ -14,13 +14,14 @@
 - Autonomous Mode: Verifier-as-gate via a separate fresh Codex task on each PR diff; restricted workspace + repository-local Git hooks + branch/PR = the deterministic guard for this private GitHub Free repository.
 - Git history author identity was corrected with explicit human approval on 2026-07-23; reachable commits now use Edward Labuschagne's GitHub noreply identity.
 - Capacitor was updated from 6 to 8.4.2 with explicit human approval on 2026-07-23 because Capacitor 6 required a critically vulnerable `tar` version; the final npm audit reports zero vulnerabilities.
+- The human explicitly authorized the M1 line-ending repair after accidentally merging PR #4 on 2026-07-23.
 - Fish Audio rejected (no documented Afrikaans; free tier bans commercial use).
 
 ## Debt ledger (cumulative across the run)
 _(none yet)_
 
 ## Open blockers
-- **M1 Verifier FAIL — deterministic format check (2026-07-23):** in a clean Windows checkout with `core.autocrlf=true`, Git materializes 13 unchanged LF files as CRLF while Prettier requires LF, so independent `npm run format:check` exits 1. Build, lint, 7 unit tests, 3 Playwright tests, guard, all five M1 acceptance criteria, and visual evidence otherwise pass. Exact report: `verification-shots/M1/verifier-gate-report.md`. No repair was attempted after the FAIL.
+- **M1 repair gate pending (2026-07-23):** the original FAIL was traced to `.gitattributes` allowing CRLF checkout materialization under `core.autocrlf=true`. The approved repair enforces LF for tracked text. Builder verification is green; a fresh independent gate is still required.
 
 ## Milestone log
 - **M0 Bootstrap — independent Verifier PASS; human-approved and merged (2026-07-23).**
@@ -39,3 +40,8 @@ _(none yet)_
   - Asset integrity: all 164 curriculum mappings resolve; `src/data/lessons.ts` and `public/audio/**` remain unchanged.
   - Security/debt: npm audit reports zero vulnerabilities; no `forge-debt` markers; cumulative debt remains zero.
   - Independent gate: **FAIL** because a fresh Windows checkout fails `npm run format:check` on CRLF-materialized unchanged files. All M1 functional criteria passed. No repair was attempted after the verdict.
+- **M1 deterministic line-ending repair — builder PASS; independent repair gate pending (2026-07-23).**
+  - Branch: `milestone/M1-format-repair`, created from the accidentally merged PR #4 commit; local Forge guard PASS.
+  - Scope: `.gitattributes` only now enforces `eol=lf` for detected text files. No application code, dependency, curriculum, audio asset, secret, or security configuration changed.
+  - Battery: aggregate `npm run verify` PASS — build, lint, format check, 7 unit tests, and 3 Playwright tests. npm audit and guard PASS. Captured in `verification-shots/M1-repair/`.
+  - Debt: none.
