@@ -1,0 +1,64 @@
+
+> tweetalig@0.0.0 verify
+> npm run build && npm run lint && npm run format:check && npm run test && npm run e2e
+
+
+> tweetalig@0.0.0 build
+> tsc --noEmit && vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 38 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.44 kB │ gzip:  0.28 kB
+dist/assets/index-DyDlX4C0.css   11.58 kB │ gzip:  2.86 kB
+dist/assets/web-CpdmRELo.js       1.25 kB │ gzip:  0.58 kB
+dist/assets/index-CEtoKuim.js   164.81 kB │ gzip: 53.92 kB
+✓ built in 1.14s
+
+> tweetalig@0.0.0 lint
+> eslint .
+
+
+> tweetalig@0.0.0 format:check
+> prettier --check "src/**/*.{ts,tsx,css}" "tests/**/*.ts" "*.{html,js,json,ts}"
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> tweetalig@0.0.0 test
+> vitest run
+
+
+ RUN  v4.1.10 C:/Projects/Tweetalig
+
+
+ Test Files  3 passed (3)
+      Tests  16 passed (16)
+   Start at  12:06:10
+   Duration  396ms (transform 571ms, setup 0ms, import 614ms, tests 20ms, environment 0ms)
+
+
+> tweetalig@0.0.0 e2e
+> playwright test
+
+[WebServer] (node:53632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 3 workers
+
+(node:29240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34228) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13468) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 3 tests\e2e\audio.spec.ts:21:1 › M1-3 requests exact English and Afrikaans audio paths (9.1s)
+  ok 1 tests\e2e\navigation.spec.ts:28:1 › M2-1 saves a validated first name locally across reload (9.4s)
+  ok 2 tests\e2e\placeholder-home.spec.ts:5:1 › M0-3 renders the Tweetalig placeholder without console errors (11.0s)
+  ok 4 tests\e2e\audio.spec.ts:62:1 › M1-5 replays preloaded bundled audio after going offline (3.9s)
+  ok 5 tests\e2e\navigation.spec.ts:60:1 › M2-2 and M2-3 show 10 lessons, lock later levels, and toggle direction (6.5s)
+  ok 6 tests\e2e\navigation.spec.ts:99:1 › M2-4 opens four game tiles without building the games (3.7s)
+
+  6 passed (1.0m)

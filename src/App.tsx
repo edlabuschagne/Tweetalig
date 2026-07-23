@@ -6,17 +6,14 @@ import {
   playWord,
   type AudioLanguage,
 } from "./audio/player";
-import { lessons } from "./data/lessons";
+import { lessons, type Direction, type Lesson } from "./data/lessons";
+import GameSelect from "./screens/GameSelect";
+import Home from "./screens/Home";
+import LessonSelect from "./screens/LessonSelect";
+import { getPlayerName } from "./storage/player-name";
 
 const audioTestLesson = lessons[0];
-
-function PlaceholderHome() {
-  return (
-    <main>
-      <h1 className="text-4xl font-bold">Tweetalig</h1>
-    </main>
-  );
-}
+type Screen = "home" | "lessons" | "games";
 
 function AudioTestScreen() {
   const [status, setStatus] = useState("Ready");
@@ -93,6 +90,68 @@ function AudioTestScreen() {
   );
 }
 
+function LearningApp() {
+  const [screen, setScreen] = useState<Screen>("home");
+  const [playerName, setPlayerName] = useState<string | null>(null);
+  const [isLoadingName, setIsLoadingName] = useState(true);
+  const [direction, setDirection] = useState<Direction>("en-af");
+  const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
+
+  useEffect(() => {
+    void getPlayerName()
+      .then(setPlayerName)
+      .catch(() => setPlayerName(null))
+      .finally(() => setIsLoadingName(false));
+  }, []);
+
+  if (isLoadingName) {
+    return (
+      <main className="min-h-screen bg-sky-50 p-6">
+        <h1 className="text-4xl font-bold text-sky-950">Tweetalig</h1>
+        <p className="mt-3 text-lg text-slate-700">
+          Loading your learning path…
+        </p>
+      </main>
+    );
+  }
+
+  if (screen === "lessons") {
+    return (
+      <LessonSelect
+        direction={direction}
+        onChangeDirection={setDirection}
+        onHome={() => setScreen("home")}
+        onSelectLesson={(lesson) => {
+          setSelectedLesson(lesson);
+          setScreen("games");
+        }}
+      />
+    );
+  }
+
+  if (screen === "games" && selectedLesson) {
+    return (
+      <GameSelect
+        direction={direction}
+        lesson={selectedLesson}
+        onBack={() => setScreen("lessons")}
+      />
+    );
+  }
+
+  return (
+    <Home
+      playerName={playerName}
+      onContinue={() => setScreen("lessons")}
+      onNameSaved={setPlayerName}
+    />
+  );
+}
+
 export default function App() {
-  return import.meta.env.DEV ? <AudioTestScreen /> : <PlaceholderHome />;
+  const showAudioTest =
+    import.meta.env.DEV &&
+    new URLSearchParams(window.location.search).has("audio-test");
+
+  return showAudioTest ? <AudioTestScreen /> : <LearningApp />;
 }

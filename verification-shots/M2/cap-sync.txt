@@ -1,0 +1,14 @@
+
+> tweetalig@0.0.0 cap:sync
+> cap sync
+
+√ Copying web assets from dist to android\app\src\main\assets\public in 65.48ms
+√ Creating capacitor.config.json in android\app\src\main\assets in 650.10μs
+√ copy android in 80.53ms
+√ Updating Android plugins in 2.25ms
+[info] Found 1 Capacitor plugin for android:
+       @capacitor/preferences@8.0.1
+√ update android in 29.95ms
+√ copy web in 4.49ms
+√ update web in 5.63ms
+[info] Sync finished in 0.145s
