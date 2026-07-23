@@ -18,11 +18,11 @@
       { "id": "M1-5", "text": "Offline after load: audio still resolves with no external fetch required (network capture + screenshot)", "passes": true, "evidence": "verification-shots/M1/M1-5-offline-network.json; verification-shots/M1/M1-5-offline-audio.png; verification-shots/M1/e2e.txt" }
     ],
     "M2": [
-      { "id": "M2-1", "text": "Saved name persists across reload (Preferences)", "passes": false, "evidence": "" },
-      { "id": "M2-2", "text": "LessonSelect shows 10 lessons; Levels 2 and 3 locked on fresh install (screenshot)", "passes": false, "evidence": "" },
-      { "id": "M2-3", "text": "Direction toggle updates visible language labels (screenshot both states)", "passes": false, "evidence": "" },
-      { "id": "M2-4", "text": "Tapping a lesson shows the four game tiles (screenshot)", "passes": false, "evidence": "" },
-      { "id": "M2-5", "text": "No console errors on any screen", "passes": false, "evidence": "" }
+      { "id": "M2-1", "text": "Saved name persists across reload (Preferences)", "passes": true, "evidence": "tests/e2e/navigation.spec.ts; verification-shots/M2/M2-1-home-empty.png; verification-shots/M2/M2-1-home-named.png; verification-shots/M2/verify.txt" },
+      { "id": "M2-2", "text": "LessonSelect shows 10 lessons; Levels 2 and 3 locked on fresh install (screenshot)", "passes": true, "evidence": "verification-shots/M2/M2-2-lesson-locks.png; verification-shots/M2/verify.txt" },
+      { "id": "M2-3", "text": "Direction toggle updates visible language labels (screenshot both states)", "passes": true, "evidence": "verification-shots/M2/M2-3-direction-en-af.png; verification-shots/M2/M2-3-direction-af-en.png; verification-shots/M2/verify.txt" },
+      { "id": "M2-4", "text": "Tapping a lesson shows the four game tiles (screenshot)", "passes": true, "evidence": "verification-shots/M2/M2-4-game-select.png; verification-shots/M2/verify.txt" },
+      { "id": "M2-5", "text": "No console errors on any screen", "passes": true, "evidence": "tests/e2e/navigation.spec.ts; verification-shots/M2/verify.txt" }
     ],
     "M3": [
       { "id": "M3-1", "text": "Flip reveals translation + emoji and auto-plays audio (screenshot + network capture)", "passes": false, "evidence": "" },

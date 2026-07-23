@@ -1,0 +1,1 @@
+Forge guard PASS: branch=milestone/M2-navigation; hooksPath=.githooks; main/force/delete blocked; new branch allowed.

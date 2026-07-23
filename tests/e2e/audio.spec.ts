@@ -22,7 +22,7 @@ test("M1-3 requests exact English and Afrikaans audio paths", async ({
   page,
 }) => {
   const errors = trackPageErrors(page);
-  await page.goto("/");
+  await page.goto("/?audio-test=1");
 
   const englishRequest = page.waitForResponse(
     (response) => new URL(response.url()).pathname === "/audio/en/blue.mp3",
@@ -68,7 +68,7 @@ test("M1-5 replays preloaded bundled audio after going offline", async ({
     (response) => new URL(response.url()).pathname === "/audio/en/red.mp3",
   );
 
-  await page.goto("/");
+  await page.goto("/?audio-test=1");
   expect(successfulAudioStatuses).toContain((await preloadResponse).status());
 
   const offlineRequests: string[] = [];
