@@ -1,0 +1,75 @@
+{
+  "project": "Tweetalig v2",
+  "contract": "Tamper-resistant, flip-only. The executor may change ONLY the `passes` field (false -> true) and the `evidence` field (empty -> a real citation: test name, file:line, or verification-shots path). Removing, rewording, reordering, or adding criteria is TAMPERING and is an automatic Verifier FAIL regardless of code quality. Every `passes: true` must be backed by the evidence it cites; a flip with empty or wrong evidence is a FAIL.",
+  "severity_note": "A criterion touching the never-lean-able floor (input validation, security, accessibility, data-loss/offline integrity) that is unmet blocks PASS.",
+  "milestones": {
+    "M0": [
+      { "id": "M0-1", "text": "npm run build completes with no errors", "passes": false, "evidence": "" },
+      { "id": "M0-2", "text": "lint, test, and playwright all run and pass on the skeleton", "passes": false, "evidence": "" },
+      { "id": "M0-3", "text": "Placeholder home renders title 'Tweetalig' with no JS console errors (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M0-4", "text": "Test asserts every lessons.ts word maps to an existing MP3 in public/audio (passes)", "passes": false, "evidence": "" },
+      { "id": "M0-5", "text": "npx cap sync succeeds and android/ exists", "passes": false, "evidence": "" }
+    ],
+    "M1": [
+      { "id": "M1-1", "text": "slugify() returns exact v1 slugs for the tricky-word table (unit test)", "passes": false, "evidence": "" },
+      { "id": "M1-2", "text": "Every word resolves to an existing MP3 in both af/ and en/ (unit test)", "passes": false, "evidence": "" },
+      { "id": "M1-3", "text": "Clicking play requests the correct /audio/{af|en}/{slug}.mp3 path, no console error (network capture)", "passes": false, "evidence": "" },
+      { "id": "M1-4", "text": "Playing a second word stops the first (only one Audio playing)", "passes": false, "evidence": "" },
+      { "id": "M1-5", "text": "Offline after load: audio still resolves with no external fetch required (network capture + screenshot)", "passes": false, "evidence": "" }
+    ],
+    "M2": [
+      { "id": "M2-1", "text": "Saved name persists across reload (Preferences)", "passes": false, "evidence": "" },
+      { "id": "M2-2", "text": "LessonSelect shows 10 lessons; Levels 2 and 3 locked on fresh install (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M2-3", "text": "Direction toggle updates visible language labels (screenshot both states)", "passes": false, "evidence": "" },
+      { "id": "M2-4", "text": "Tapping a lesson shows the four game tiles (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M2-5", "text": "No console errors on any screen", "passes": false, "evidence": "" }
+    ],
+    "M3": [
+      { "id": "M3-1", "text": "Flip reveals translation + emoji and auto-plays audio (screenshot + network capture)", "passes": false, "evidence": "" },
+      { "id": "M3-2", "text": "Round completion routes to Results with score 0-100 (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M3-3", "text": "Works in both directions (screenshot each)", "passes": false, "evidence": "" },
+      { "id": "M3-4", "text": "Cards labelled, focus visible (a11y assertions)", "passes": false, "evidence": "" },
+      { "id": "M3-5", "text": "No console errors", "passes": false, "evidence": "" }
+    ],
+    "M4": [
+      { "id": "M4-1", "text": "Word plays on start/replay; choices render (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M4-2", "text": "Correct advances with positive feedback; wrong shows corrective feedback (screenshot both)", "passes": false, "evidence": "" },
+      { "id": "M4-3", "text": "Round completes to Results with score; both directions; no console errors", "passes": false, "evidence": "" }
+    ],
+    "M5": [
+      { "id": "M5-1", "text": "Correct pair locks as matched (screenshot before/after)", "passes": false, "evidence": "" },
+      { "id": "M5-2", "text": "Mismatched pair resets (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M5-3", "text": "All pairs matched to Results with score; both directions; no console errors", "passes": false, "evidence": "" }
+    ],
+    "M6": [
+      { "id": "M6-1", "text": "Accent-insensitive correct answer scores positive (unit test on checker + screenshot)", "passes": false, "evidence": "" },
+      { "id": "M6-2", "text": "Incorrect shows the correct spelling (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M6-3", "text": "Round completes to Results with score; both directions; no console errors", "passes": false, "evidence": "" }
+    ],
+    "M7": [
+      { "id": "M7-1", "text": "Unit tests: best-score-increases-only; unlock >=40; stars 50/70/90", "passes": false, "evidence": "" },
+      { "id": "M7-2", "text": "Scoring >=40 on Level 1 unlocks Level 2 after reload (Playwright)", "passes": false, "evidence": "" },
+      { "id": "M7-3", "text": "Results shows correct star at threshold (screenshots)", "passes": false, "evidence": "" },
+      { "id": "M7-4", "text": "Progress survives restart (reload test)", "passes": false, "evidence": "" },
+      { "id": "M7-5", "text": "No console errors", "passes": false, "evidence": "" }
+    ],
+    "M10": [
+      { "id": "M10-1", "text": "Real browser load of the DEPLOYED URL renders Home with zero page errors, origin asserted", "passes": false, "evidence": "" },
+      { "id": "M10-2", "text": "APK installs on a physical phone; full lesson completes in airplane mode with audio (human-confirmed in HANDOFF)", "passes": false, "evidence": "" },
+      { "id": "M10-3", "text": "No secrets in the repo", "passes": false, "evidence": "" }
+    ],
+    "M8": [
+      { "id": "M8-1", "text": "All M1-M7 tests still pass unchanged (regression gate)", "passes": false, "evidence": "" },
+      { "id": "M8-2", "text": "Mascot renders on Home and Results (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M8-3", "text": "Round awards XP + celebration; confetti on high score (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M8-4", "text": "Streak increments across sessions (simulated dates)", "passes": false, "evidence": "" },
+      { "id": "M8-5", "text": "Sound FX respect mute; word audio still works; a11y intact; no console errors", "passes": false, "evidence": "" }
+    ],
+    "M9": [
+      { "id": "M9-1", "text": "Parent Guide reachable from Home and renders content (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M9-2", "text": "BETA badge visible on Home (screenshot)", "passes": false, "evidence": "" },
+      { "id": "M9-3", "text": "Feedback link opens the configured URL (placeholder tracked as forge-debt until supplied)", "passes": false, "evidence": "" },
+      { "id": "M9-4", "text": "No console errors", "passes": false, "evidence": "" }
+    ]
+  }
+}
