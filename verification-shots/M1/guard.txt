@@ -1,0 +1,1 @@
+Forge guard PASS: branch=milestone/M1-audio; hooksPath=.githooks; main/force/delete blocked; new branch allowed.

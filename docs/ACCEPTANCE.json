@@ -11,11 +11,11 @@
       { "id": "M0-5", "text": "npx cap sync succeeds and android/ exists", "passes": true, "evidence": "verification-shots/M0/cap-sync.txt; android/" }
     ],
     "M1": [
-      { "id": "M1-1", "text": "slugify() returns exact v1 slugs for the tricky-word table (unit test)", "passes": false, "evidence": "" },
-      { "id": "M1-2", "text": "Every word resolves to an existing MP3 in both af/ and en/ (unit test)", "passes": false, "evidence": "" },
-      { "id": "M1-3", "text": "Clicking play requests the correct /audio/{af|en}/{slug}.mp3 path, no console error (network capture)", "passes": false, "evidence": "" },
-      { "id": "M1-4", "text": "Playing a second word stops the first (only one Audio playing)", "passes": false, "evidence": "" },
-      { "id": "M1-5", "text": "Offline after load: audio still resolves with no external fetch required (network capture + screenshot)", "passes": false, "evidence": "" }
+      { "id": "M1-1", "text": "slugify() returns exact v1 slugs for the tricky-word table (unit test)", "passes": true, "evidence": "tests/unit/player.test.ts; verification-shots/M1/test.txt" },
+      { "id": "M1-2", "text": "Every word resolves to an existing MP3 in both af/ and en/ (unit test)", "passes": true, "evidence": "tests/unit/audio-assets.test.ts; verification-shots/M1/test.txt" },
+      { "id": "M1-3", "text": "Clicking play requests the correct /audio/{af|en}/{slug}.mp3 path, no console error (network capture)", "passes": true, "evidence": "verification-shots/M1/M1-3-audio-requests.json; verification-shots/M1/M1-3-correct-audio-path.png; verification-shots/M1/e2e.txt" },
+      { "id": "M1-4", "text": "Playing a second word stops the first (only one Audio playing)", "passes": true, "evidence": "tests/unit/player.test.ts; verification-shots/M1/test.txt" },
+      { "id": "M1-5", "text": "Offline after load: audio still resolves with no external fetch required (network capture + screenshot)", "passes": true, "evidence": "verification-shots/M1/M1-5-offline-network.json; verification-shots/M1/M1-5-offline-audio.png; verification-shots/M1/e2e.txt" }
     ],
     "M2": [
       { "id": "M2-1", "text": "Saved name persists across reload (Preferences)", "passes": false, "evidence": "" },
