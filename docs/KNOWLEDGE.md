@@ -4,7 +4,7 @@ The index of Tweetalig v2's durable knowledge. Load this, then traverse to the 1
 
 ## Nodes
 
-- **[AGENTS.md](../AGENTS.md)** — the harness: identity, autonomous run loop, STOP RULES, TRIPWIRES, Codex Cloud enforcement, security floor, QA. *Always loaded.*
+- **[AGENTS.md](../AGENTS.md)** — the harness: identity, autonomous run loop, STOP RULES, TRIPWIRES, execution guard enforcement, security floor, QA. *Always loaded.*
 - **[PROJECT_SCOPE.md](PROJECT_SCOPE.md)** — what the app is and why; users; core features; out-of-scope; success criteria.
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — tech stack, component map, data models, the audio system, conventions. *The Verifier gets this whole, every gate.*
 - **[MILESTONES.md](MILESTONES.md)** — the two-run build plan (Run A learning app, Run B delight), per-milestone criteria + DO-NOT-BUILD + autonomy tags + verification.

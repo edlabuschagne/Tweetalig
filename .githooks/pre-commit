@@ -1,0 +1,13 @@
+#!/bin/sh
+
+branch=$(git symbolic-ref --quiet --short HEAD) || {
+  echo "FORGE GUARD: commits are blocked while HEAD is detached." >&2
+  exit 1
+}
+
+if [ "$branch" = "main" ]; then
+  echo "FORGE GUARD: commits to main are blocked. Create a milestone branch." >&2
+  exit 1
+fi
+
+exit 0
