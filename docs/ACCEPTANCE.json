@@ -4,11 +4,11 @@
   "severity_note": "A criterion touching the never-lean-able floor (input validation, security, accessibility, data-loss/offline integrity) that is unmet blocks PASS.",
   "milestones": {
     "M0": [
-      { "id": "M0-1", "text": "npm run build completes with no errors", "passes": false, "evidence": "" },
-      { "id": "M0-2", "text": "lint, test, and playwright all run and pass on the skeleton", "passes": false, "evidence": "" },
-      { "id": "M0-3", "text": "Placeholder home renders title 'Tweetalig' with no JS console errors (screenshot)", "passes": false, "evidence": "" },
-      { "id": "M0-4", "text": "Test asserts every lessons.ts word maps to an existing MP3 in public/audio (passes)", "passes": false, "evidence": "" },
-      { "id": "M0-5", "text": "npx cap sync succeeds and android/ exists", "passes": false, "evidence": "" }
+      { "id": "M0-1", "text": "npm run build completes with no errors", "passes": true, "evidence": "verification-shots/M0/build.txt" },
+      { "id": "M0-2", "text": "lint, test, and playwright all run and pass on the skeleton", "passes": true, "evidence": "verification-shots/M0/lint.txt; verification-shots/M0/test.txt; verification-shots/M0/e2e.txt" },
+      { "id": "M0-3", "text": "Placeholder home renders title 'Tweetalig' with no JS console errors (screenshot)", "passes": true, "evidence": "verification-shots/M0/M0-3-placeholder-home.png; verification-shots/M0/e2e.txt" },
+      { "id": "M0-4", "text": "Test asserts every lessons.ts word maps to an existing MP3 in public/audio (passes)", "passes": true, "evidence": "tests/unit/audio-assets.test.ts; verification-shots/M0/test.txt" },
+      { "id": "M0-5", "text": "npx cap sync succeeds and android/ exists", "passes": true, "evidence": "verification-shots/M0/cap-sync.txt; android/" }
     ],
     "M1": [
       { "id": "M1-1", "text": "slugify() returns exact v1 slugs for the tricky-word table (unit test)", "passes": false, "evidence": "" },
