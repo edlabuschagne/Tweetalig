@@ -1,6 +1,6 @@
 # VERIFICATION.md — Tweetalig v2
 
-> **One spec, two readers.** The **executor** (Codex, building the milestone) runs this as its own self-check before declaring done. The **independent Verifier** runs the *same* checklist again at the gate, in a **fresh context**, having never seen the executor's reasoning. In this project the Verifier is a **separate Codex Cloud task** pointed only at the milestone's PR diff + the inputs below.
+> **One spec, two readers.** The **executor** (Codex, building the milestone) runs this as its own self-check before declaring done. The **independent Verifier** runs the *same* checklist again at the gate, in a **fresh context**, having never seen the executor's reasoning. In this project the Verifier is a **separate fresh Codex task** pointed only at the milestone's PR diff + the inputs below.
 >
 > **Autonomous Mode:** the Verifier IS the gate. PASS / PASS-WITH-NOTES on an `auto-verifiable` milestone → merge the PR and proceed. `needs-human-check` or FAIL → STOP for you.
 
@@ -43,7 +43,7 @@ It must **not** inherit the executor's chat, plan, or "make this work" framing. 
 - **Accessibility** — tap targets, labels, visible focus, colour-plus-icon on new UI (kids' app).
 - **Offline / data integrity** — core use works offline; progress writes don't corrupt on restart.
 
-**Check 6 — Tripwire audit.** Confirm the change did not silently cross an `AGENTS.md` TRIPWIRE without recorded approval (git history rewrite; deleting/overwriting files outside the milestone's output; touching secrets/config; spending money; publishing). **Autonomous Mode:** also confirm the session-start guard note was recorded (for Codex Cloud: that work happened on a milestone branch in the isolated container, not force-pushed to main). Crossing one unapproved = **FAIL + STOP**.
+**Check 6 — Tripwire audit.** Confirm the change did not silently cross an `AGENTS.md` TRIPWIRE without recorded approval (git history rewrite; deleting/overwriting files outside the milestone's output; touching secrets/config; spending money; publishing). **Autonomous Mode:** also confirm the session-start guard note records a restricted workspace, a milestone branch, `core.hooksPath=.githooks`, and a passing `scripts/verify-forge-guard.ps1` run. Crossing one unapproved or a missing guard proof = **FAIL + STOP**.
 
 **Check 7 — Debt ledger.** Grep the whole diff for `forge-debt:` markers; assemble them with `file:line` + severity (low cosmetic / med correctness-edge / high touches Check 5). Marked = decision log (record in HANDOFF). **Unmarked** shortcut = hidden debt → PASS-WITH-NOTES at best, FAIL if it touches the Check 5 floor.
 

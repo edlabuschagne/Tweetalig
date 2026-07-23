@@ -17,7 +17,7 @@
 | E2E + screenshots | **Playwright** (headless Chromium) | Drives the web build, captures observable-outcome screenshots for the Verifier |
 | Lint/format | **ESLint + Prettier** | Deterministic battery |
 | Web hosting (sharing) | **Netlify or Vercel or GitHub Pages** (free static) | Deploy the web build → shareable link for parents |
-| Executor | **Codex Cloud** (swappable — model-agnostic) | Runs in an isolated container against the GitHub repo, returns PRs |
+| Executor | **Codex** (swappable — model-agnostic) | Runs in a restricted workspace against the GitHub repo, returns PRs |
 
 **Leanness rule:** no new dependency without explicit approval (an unsanctioned package is a scope violation → Verifier FAIL). Prefer the platform/native feature and what's already installed. Reuse v1's curriculum and MP3s rather than regenerating.
 

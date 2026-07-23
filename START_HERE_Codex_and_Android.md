@@ -17,7 +17,12 @@ The shape of the whole thing: **Codex builds the web app in the cloud → gives 
    - `src/data/lessons.ts` — the curriculum
    - `public/audio/af/` and `public/audio/en/` — the 170 MP3 files
    *(Codex will scaffold the rest of the app around these in Milestone 0. You don't need to copy anything else from v1.)*
-4. Commit and push. Tip: turn on **branch protection** for `main` (Settings → Branches) so nothing lands there without a PR. That's part of what makes the autonomous run safe.
+4. Commit and push.
+5. This private repository uses GitHub Free, so server-side rulesets are not enforced. Activate the committed local Forge guard once per clone:
+   - `git config core.hooksPath .githooks`
+   - create or switch to a non-`main` milestone branch
+   - `powershell -ExecutionPolicy Bypass -File scripts/verify-forge-guard.ps1`
+   The hooks block commits and direct pushes on `main`, force-pushes, and remote branch deletion. The human merges reviewed PRs in GitHub.
 
 ### 2. Connect Codex to the repo (ChatGPT app)
 In the ChatGPT app, open **Codex**, and connect it to your new `tweetalig` GitHub repo (grant it access to that repo only). Codex will read `AGENTS.md` automatically.
@@ -33,7 +38,7 @@ Paste a prompt like this (change the milestone number and your run length):
 
 > Follow `AGENTS.md` and `docs/` (Project Forge, Autonomous Mode). Build **Milestone 0** only, on a branch `milestone/M0-bootstrap`. Honour the milestone's acceptance criteria and DO-NOT-BUILD list. Run the full battery (build, lint, test, e2e), capture outcomes to `verification-shots/M0/`, flip only the ACCEPTANCE.json entries you can prove, refresh `HANDOFF.md`, and open a PR. **Run length for this session: stop after Milestone 2.** Stop at any tripwire, any Verifier FAIL, or any `needs-human-check` milestone, per the run loop.
 
-Codex works in its container and opens a PR when done.
+Codex works in its restricted workspace and opens a PR when done.
 
 ### B) Verifier task (fresh — start a NEW Codex conversation)
 Open a **new** Codex task (so it has none of the Builder's context) and paste this **verbatim**, pointing it at the PR:
