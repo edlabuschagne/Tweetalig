@@ -3,8 +3,8 @@
 > Session state, refreshed at every milestone end. The human's batch-review artifact. Read this at the start of every session.
 
 ## Current state
-- **Status:** Milestone 0 is built and self-verified on `milestone/M0-bootstrap`; independent Verifier pending.
-- **Next action:** open the M0 PR and run the independent fresh-context Verifier. M0 is `needs-human-check`, so stop for human review even if the Verifier passes.
+- **Status:** Milestone 0 is built and independently verified **PASS** on `milestone/M0-bootstrap`; stopped at the required human-review gate.
+- **Next action (human):** review PR #2 and `verification-shots/M0/M0-3-placeholder-home.png`; merge only if satisfied. Then explicitly tell Codex to continue with M1.
 - **Run plan:** Run A = M0–M7 + M10 (the learning app + packaging). Run B = M8–M9 (delight layer), started only after Run A ships.
 - **Suggested first run length:** "build through M2, then stop" — watch the loop + Verifier behave before letting it run further.
 
@@ -23,10 +23,11 @@ _(none yet)_
 _(none)_
 
 ## Milestone log
-- **M0 Bootstrap — builder self-check PASS, Verifier pending (2026-07-23).**
+- **M0 Bootstrap — independent Verifier PASS; human review required (2026-07-23).**
   - Guard note: restricted Codex workspace; branch `milestone/M0-bootstrap`; `core.hooksPath=.githooks`; `scripts/verify-forge-guard.ps1` PASS.
   - Battery: build, lint, format check, unit test, and Playwright all PASS; aggregate `npm run verify` PASS. Captured in `verification-shots/M0/`.
   - Observable outcome: `M0-3-placeholder-home.png` shows the title “Tweetalig”; Playwright captured zero console/page errors.
   - Asset integrity: 82 English + 82 Afrikaans curriculum mappings resolve to bundled MP3 files; reused `src/data/lessons.ts` and `public/audio/**` are unchanged.
   - Android: Capacitor 8.4.2 shell generated; `npx cap sync` PASS; `android/` exists.
   - Security/debt: npm audit reports zero vulnerabilities; no secrets/network core calls introduced; no open `forge-debt` entries.
+  - Independent gate: **PASS**, no notes or blocking findings. Exact report: `verification-shots/M0/verifier-gate-report.md`.
