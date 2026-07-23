@@ -1,0 +1,6 @@
+
+> tweetalig@0.0.0 format:check
+> prettier --check "src/**/*.{ts,tsx,css}" "tests/**/*.ts" "*.{html,js,json,ts}"
+
+Checking formatting...
+All matched files use Prettier code style!

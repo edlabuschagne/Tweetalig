@@ -1,0 +1,58 @@
+
+> tweetalig@0.0.0 verify
+> npm run build && npm run lint && npm run format:check && npm run test && npm run e2e
+
+
+> tweetalig@0.0.0 build
+> tsc --noEmit && vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 29 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.44 kB │ gzip:  0.28 kB
+dist/assets/index-CQb8KVrY.css    6.02 kB │ gzip:  1.80 kB
+dist/assets/index-BFTwYVJJ.js   142.81 kB │ gzip: 46.00 kB
+✓ built in 1.06s
+
+> tweetalig@0.0.0 lint
+> eslint .
+
+
+> tweetalig@0.0.0 format:check
+> prettier --check "src/**/*.{ts,tsx,css}" "tests/**/*.ts" "*.{html,js,json,ts}"
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> tweetalig@0.0.0 test
+> vitest run
+
+
+ RUN  v4.1.10 C:/Projects/Tweetalig
+
+
+ Test Files  2 passed (2)
+      Tests  7 passed (7)
+   Start at  10:33:09
+   Duration  388ms (transform 78ms, setup 0ms, import 120ms, tests 18ms, environment 0ms)
+
+
+> tweetalig@0.0.0 e2e
+> playwright test
+
+[WebServer] (node:11296) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 2 workers
+
+(node:51428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\e2e\placeholder-home.spec.ts:5:1 › M0-3 renders the Tweetalig placeholder without console errors (6.3s)
+  ok 1 tests\e2e\audio.spec.ts:21:1 › M1-3 requests exact English and Afrikaans audio paths (8.4s)
+  ok 3 tests\e2e\audio.spec.ts:62:1 › M1-5 replays preloaded bundled audio after going offline (2.7s)
+
+  3 passed (47.7s)

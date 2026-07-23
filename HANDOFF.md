@@ -3,8 +3,8 @@
 > Session state, refreshed at every milestone end. The human's batch-review artifact. Read this at the start of every session.
 
 ## Current state
-- **Status:** Milestone 0 is built and independently verified **PASS** on `milestone/M0-bootstrap`; stopped at the required human-review gate.
-- **Next action (human):** review PR #2 and `verification-shots/M0/M0-3-placeholder-home.png`; merge only if satisfied. Then explicitly tell Codex to continue with M1.
+- **Status:** Milestone 0 was human-approved and merged. Milestone 1 is built and self-verified on `milestone/M1-audio`; its independent Verifier gate is pending.
+- **Next action:** open the M1 PR and run the independent Forge Verifier against only the PR diff, required docs, and `verification-shots/M1/`.
 - **Run plan:** Run A = M0–M7 + M10 (the learning app + packaging). Run B = M8–M9 (delight layer), started only after Run A ships.
 - **Suggested first run length:** "build through M2, then stop" — watch the loop + Verifier behave before letting it run further.
 
@@ -23,7 +23,7 @@ _(none yet)_
 _(none)_
 
 ## Milestone log
-- **M0 Bootstrap — independent Verifier PASS; human review required (2026-07-23).**
+- **M0 Bootstrap — independent Verifier PASS; human-approved and merged (2026-07-23).**
   - Guard note: restricted Codex workspace; branch `milestone/M0-bootstrap`; `core.hooksPath=.githooks`; `scripts/verify-forge-guard.ps1` PASS.
   - Battery: build, lint, format check, unit test, and Playwright all PASS; aggregate `npm run verify` PASS. Captured in `verification-shots/M0/`.
   - Observable outcome: `M0-3-placeholder-home.png` shows the title “Tweetalig”; Playwright captured zero console/page errors.
@@ -31,3 +31,10 @@ _(none)_
   - Android: Capacitor 8.4.2 shell generated; `npx cap sync` PASS; `android/` exists.
   - Security/debt: npm audit reports zero vulnerabilities; no secrets/network core calls introduced; no open `forge-debt` entries.
   - Independent gate: **PASS**, no notes or blocking findings. Exact report: `verification-shots/M0/verifier-gate-report.md`.
+- **M1 Core data + offline audio playback — self-check PASS; independent gate pending (2026-07-23).**
+  - Guard note: restricted workspace; branch `milestone/M1-audio`; `core.hooksPath=.githooks`; `scripts/verify-forge-guard.ps1` PASS. No access to production, secrets, or billing.
+  - Built only M1 scope: single-source `src/audio/player.ts` slug/path/play/stop behavior and a development-only lesson audio test screen. No games, progress storage, live TTS, runtime network feature, or dependency was added.
+  - Battery: build, lint, format check, 7 unit tests, and 3 Playwright tests PASS; aggregate `npm run verify` PASS. Capacitor sync and npm audit PASS. Captured in `verification-shots/M1/`.
+  - Observable outcomes: exact English/Afrikaans paths captured in `M1-3-audio-requests.json`; offline-after-load playback captured in `M1-5-offline-network.json`; both screenshots show successful playback with no error.
+  - Asset integrity: all 164 curriculum mappings resolve; `src/data/lessons.ts` and `public/audio/**` remain unchanged.
+  - Security/debt: npm audit reports zero vulnerabilities; no `forge-debt` markers; cumulative debt remains zero.

@@ -3,17 +3,8 @@ import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+import { slugify } from "../../src/audio/player";
 import { lessons } from "../../src/data/lessons";
-
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/['’]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-}
 
 describe("bundled lesson audio", () => {
   it("maps every English and Afrikaans word to an existing MP3", () => {

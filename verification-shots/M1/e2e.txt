@@ -1,0 +1,18 @@
+
+> tweetalig@0.0.0 e2e
+> playwright test
+
+[WebServer] (node:34624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 2 workers
+
+(node:2916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37940) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\e2e\placeholder-home.spec.ts:5:1 › M0-3 renders the Tweetalig placeholder without console errors (374ms)
+  ok 1 tests\e2e\audio.spec.ts:21:1 › M1-3 requests exact English and Afrikaans audio paths (756ms)
+  ok 3 tests\e2e\audio.spec.ts:62:1 › M1-5 replays preloaded bundled audio after going offline (409ms)
+
+  3 passed (35.5s)

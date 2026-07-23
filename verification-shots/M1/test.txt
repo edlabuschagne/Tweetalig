@@ -1,0 +1,12 @@
+
+> tweetalig@0.0.0 test
+> vitest run
+
+
+ RUN  v4.1.10 C:/Projects/Tweetalig
+
+
+ Test Files  2 passed (2)
+      Tests  7 passed (7)
+   Start at  10:30:31
+   Duration  224ms (transform 78ms, setup 0ms, import 102ms, tests 14ms, environment 0ms)
