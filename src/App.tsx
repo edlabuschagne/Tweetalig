@@ -6,14 +6,21 @@ import {
   playWord,
   type AudioLanguage,
 } from "./audio/player";
-import { lessons, type Direction, type Lesson } from "./data/lessons";
+import {
+  lessons,
+  type Direction,
+  type GameId,
+  type Lesson,
+} from "./data/lessons";
+import GamePlay from "./screens/GamePlay";
 import GameSelect from "./screens/GameSelect";
 import Home from "./screens/Home";
 import LessonSelect from "./screens/LessonSelect";
+import Results from "./screens/Results";
 import { getPlayerName } from "./storage/player-name";
 
 const audioTestLesson = lessons[0];
-type Screen = "home" | "lessons" | "games";
+type Screen = "home" | "lessons" | "games" | "game" | "results";
 
 function AudioTestScreen() {
   const [status, setStatus] = useState("Ready");
@@ -96,6 +103,8 @@ function LearningApp() {
   const [isLoadingName, setIsLoadingName] = useState(true);
   const [direction, setDirection] = useState<Direction>("en-af");
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
+  const [selectedGame, setSelectedGame] = useState<GameId>("flashcards");
+  const [resultScore, setResultScore] = useState(0);
 
   useEffect(() => {
     void getPlayerName()
@@ -135,6 +144,37 @@ function LearningApp() {
         direction={direction}
         lesson={selectedLesson}
         onBack={() => setScreen("lessons")}
+        onSelectGame={(game) => {
+          setSelectedGame(game);
+          setScreen("game");
+        }}
+      />
+    );
+  }
+
+  if (screen === "game" && selectedLesson) {
+    return (
+      <GamePlay
+        direction={direction}
+        game={selectedGame}
+        lesson={selectedLesson}
+        onComplete={(score) => {
+          setResultScore(score);
+          setScreen("results");
+        }}
+        onExit={() => setScreen("games")}
+      />
+    );
+  }
+
+  if (screen === "results" && selectedLesson) {
+    return (
+      <Results
+        direction={direction}
+        lesson={selectedLesson}
+        onChooseLesson={() => setScreen("lessons")}
+        onPlayAgain={() => setScreen("game")}
+        score={resultScore}
       />
     );
   }
