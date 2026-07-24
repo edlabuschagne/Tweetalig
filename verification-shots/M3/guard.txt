@@ -1,0 +1,1 @@
+Forge guard PASS: branch=milestone/M3-flashcards; hooksPath=.githooks; main/force/delete blocked; new branch allowed.

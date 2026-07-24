@@ -1,0 +1,69 @@
+
+> tweetalig@0.0.0 verify
+> npm run build && npm run lint && npm run format:check && npm run test && npm run e2e
+
+
+> tweetalig@0.0.0 build
+> tsc --noEmit && vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 42 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.44 kB │ gzip:  0.28 kB
+dist/assets/index-B-zh3W8z.css   15.25 kB │ gzip:  3.53 kB
+dist/assets/web-CIM9piiZ.js       1.25 kB │ gzip:  0.58 kB
+dist/assets/index-D_tey2iq.js   171.40 kB │ gzip: 55.47 kB
+✓ built in 1.33s
+
+> tweetalig@0.0.0 lint
+> eslint .
+
+
+> tweetalig@0.0.0 format:check
+> prettier --check "src/**/*.{ts,tsx,css}" "tests/**/*.ts" "*.{html,js,json,ts}"
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> tweetalig@0.0.0 test
+> vitest run
+
+
+ RUN  v4.1.10 C:/Projects/Tweetalig
+
+
+ Test Files  3 passed (3)
+      Tests  16 passed (16)
+   Start at  15:03:33
+   Duration  568ms (transform 132ms, setup 0ms, import 182ms, tests 17ms, environment 0ms)
+
+
+> tweetalig@0.0.0 e2e
+> playwright test
+
+[WebServer] (node:22016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 9 tests using 4 workers
+
+(node:4132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:50408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\e2e\audio.spec.ts:21:1 › M1-3 requests exact English and Afrikaans audio paths (4.7s)
+  ok 1 tests\e2e\placeholder-home.spec.ts:5:1 › M0-3 renders the Tweetalig placeholder without console errors (5.7s)
+  ok 4 tests\e2e\flashcards.spec.ts:41:1 › M3-1 and M3-4 flip accessibly and auto-play the target audio (11.6s)
+  ok 3 tests\e2e\navigation.spec.ts:33:1 › M2-1 saves a validated first name locally across reload (13.1s)
+  ok 7 tests\e2e\navigation.spec.ts:59:1 › M2-2 and M2-3 show 10 lessons, lock later levels, and toggle direction (4.4s)
+  ok 5 tests\e2e\audio.spec.ts:62:1 › M1-5 replays preloaded bundled audio after going offline (15.9s)
+  ok 8 tests\e2e\navigation.spec.ts:89:1 › M2-4 opens four game tiles without building the games (3.5s)
+  ok 6 tests\e2e\flashcards.spec.ts:97:1 › M3-2 shows every lesson word once and completes with a numeric score (11.1s)
+  ok 9 tests\e2e\flashcards.spec.ts:140:1 › M3-3 works from Afrikaans to English with English audio (2.6s)
+
+  9 passed (50.2s)
