@@ -42,9 +42,9 @@
       { "id": "M5-3", "text": "All pairs matched to Results with score; both directions; no console errors", "passes": true, "evidence": "tests/e2e/match-pairs.spec.ts (M5-3 'Score 100 out of 100' en-af + af-en Kleure→Colors + errors.toEqual([])); verification-shots/M5/M5-3-results.png; verification-shots/M5/M5-3-af-en.png; verification-shots/M5/verify.txt" }
     ],
     "M6": [
-      { "id": "M6-1", "text": "Accent-insensitive correct answer scores positive (unit test on checker + screenshot)", "passes": false, "evidence": "" },
-      { "id": "M6-2", "text": "Incorrect shows the correct spelling (screenshot)", "passes": false, "evidence": "" },
-      { "id": "M6-3", "text": "Round completes to Results with score; both directions; no console errors", "passes": false, "evidence": "" }
+      { "id": "M6-1", "text": "Accent-insensitive correct answer scores positive (unit test on checker + screenshot)", "passes": true, "evidence": "src/games/spell-check.ts (normalizeSpelling folds accents); tests/unit/spell-check.test.ts (isSpellingCorrect('voel','Voël')===true etc.); tests/e2e/spell-it.spec.ts (M6-1 Bird typed 'Voel'→Correct); verification-shots/M6/M6-1-accent-correct.png; verification-shots/M6/verify.txt" },
+      { "id": "M6-2", "text": "Incorrect shows the correct spelling (screenshot)", "passes": true, "evidence": "src/games/SpellIt.tsx (reveals 'it’s spelled “{answer}”' on wrong); tests/e2e/spell-it.spec.ts (M6-2 'xyz'→feedback contains 'Rooi'+'Not quite'); verification-shots/M6/M6-2-wrong.png; verification-shots/M6/verify.txt" },
+      { "id": "M6-3", "text": "Round completes to Results with score; both directions; no console errors", "passes": true, "evidence": "tests/e2e/spell-it.spec.ts (M6-3 'Score 100 out of 100' en-af + af-en + errors.toEqual([])); verification-shots/M6/M6-3-results.png; verification-shots/M6/M6-3-af-en.png; verification-shots/M6/verify.txt" }
     ],
     "M7": [
       { "id": "M7-1", "text": "Unit tests: best-score-increases-only; unlock >=40; stars 50/70/90", "passes": false, "evidence": "" },

@@ -2,6 +2,7 @@ import type { Direction, GameId, Lesson } from "../data/lessons";
 import Flashcards from "../games/Flashcards";
 import ListenChoose from "../games/ListenChoose";
 import MatchPairs from "../games/MatchPairs";
+import SpellIt from "../games/SpellIt";
 
 interface GamePlayProps {
   direction: Direction;
@@ -17,6 +18,8 @@ export default function GamePlay({ game, ...props }: GamePlayProps) {
       return <ListenChoose {...props} />;
     case "match":
       return <MatchPairs {...props} />;
+    case "spell":
+      return <SpellIt {...props} />;
     case "flashcards":
     default:
       return <Flashcards {...props} />;
