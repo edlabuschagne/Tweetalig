@@ -22,6 +22,7 @@
 - M3-note-1 (low): `verification-shots/M3/M3-1-audio-request.json` is test-written, not a raw network dump; the live `waitForResponse` assertion is the real proof. Cosmetic.
 - M3-note-2 (low): Flashcards reports a fixed score of 100 (no wrong answers in a flip game); real per-game scoring lands in M7.
 - M3-note-3 (low): `captureM2` skips a screenshot when the file already exists — M2 shots won't refresh on future UI drift (assertions unaffected).
+- M4-note-1 (low): `buildChoices` (ListenChoose) doesn't dedupe distractors — relies on each lesson having ≥4 distinct translations (true today). A future lesson with a duplicate translation could cause a React `key` collision. Revisit if the curriculum grows duplicates.
 
 ## Open blockers
 _(none)_
