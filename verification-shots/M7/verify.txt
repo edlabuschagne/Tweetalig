@@ -3,7 +3,7 @@ Date: 2026-07-24T09:15:05Z
 
 Battery (all commands actually run):
   build/lint/format:check : PASS
-  unit : PASS (vitest — 38 tests; +13 new in tests/unit/progress.test.ts)
+  unit : PASS (vitest — 38 tests; +14 new in tests/unit/progress.test.ts)
   e2e  : PASS (playwright — 20 tests: M0–M6 regression + 2 M7)
 
 M7 tests:

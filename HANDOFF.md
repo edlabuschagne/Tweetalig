@@ -3,8 +3,8 @@
 > Session state, refreshed at every milestone end. The human's batch-review artifact. Read this at the start of every session.
 
 ## Current state
-- **Status:** M0–M2 merged to `main` and pushed (github.com/edlabuschagne/Tweetalig). **M3 Flashcards**, **M4 Listen & Choose**, **M5 Match Pairs**, and **M6 Spell It** built, full battery green (fresh Linux rig), independent Verifier PASS, and committed on branch `milestone/M3-flashcards`. **Awaiting human push + merge.** M7 not yet started (see the resume block in the project doc `tweetalig-v2/RESUME_Claude_executor.md`).
-- **Branch `milestone/M3-flashcards` commits (ahead of main):** M3 feat+docs, M4 feat+docs, M5 feat+docs (`6e94997`/`c5c57e8`), M6 feat+docs (`23ff531`/…). Push this branch and open ONE PR into main; or cherry-review per commit.
+- **Status:** M0–M2 merged to `main` and pushed (github.com/edlabuschagne/Tweetalig). **M3–M7** (Flashcards, Listen & Choose, Match Pairs, Spell It, Progress/scoring/level-unlock) all built, full battery green (fresh Linux rig), independent Verifier PASS, committed on branch `milestone/M3-flashcards`. **Awaiting human push + merge.** **Run A feature build is COMPLETE** — only M10 packaging (deploy + APK, human-driven) remains. See `tweetalig-v2/RESUME_Claude_executor.md`.
+- **Branch `milestone/M3-flashcards` commits (ahead of main):** M3 feat+docs, M4 feat+docs, M5 feat+docs, M6 feat+docs, M7 feat+docs (`6b9d885` feat, docs pending this commit). Push this branch and open ONE PR into main; or cherry-review per commit.
 - **Cleanup for the human (bridge can't delete):** in the repo root, delete the throwaway folder `_to_delete/` and stray files `_wtest.txt`, `_dtest/`. Also harmless orphaned `tmp_obj_*` files may sit in `.git/objects/**` (a `git gc` clears them). None are tracked/committed.
 - **Executor change (2026-07-24):** Codex usage was exhausted; the executor is now **Claude (Cowork)**. Claude has direct file/shell tools + a desktop bridge to the local repo at `C:\Projects\Tweetalig`. Build/test runs in a Linux cloud rig (the bridge VM can't run the Windows-native toolchain); verified source is written back to the local repo over the bridge; **the human does every `git push` and PR merge** (no credentials leave the machine).
 - **Next action (human):** push `milestone/M3-flashcards` and open/merge its PR (M3 is a `needs-human-check` gate; feel already approved from screenshots). Then Claude continues M4→M7 on the same branch.
@@ -23,6 +23,7 @@
 - M3-note-2 (low): Flashcards reports a fixed score of 100 (no wrong answers in a flip game); real per-game scoring lands in M7.
 - M3-note-3 (low): `captureM2` skips a screenshot when the file already exists — M2 shots won't refresh on future UI drift (assertions unaffected).
 - M4-note-1 (low): `buildChoices` (ListenChoose) doesn't dedupe distractors — relies on each lesson having ≥4 distinct translations (true today). A future lesson with a duplicate translation could cause a React `key` collision. Revisit if the curriculum grows duplicates.
+- M7-note-1 (low, design): level unlock is **per-direction** and averages over **played** prior-level lessons only (unplayed excluded). This is more lenient than a literal reading of ARCHITECTURE.md ("average best across Level N-1 lessons") — one Level-1 lesson at ≥40 unlocks Level 2. It satisfies every M7 acceptance criterion, is unit-pinned, and preserves the M2 fresh-install-locked invariant. Tighten to "average across ALL prior-level lessons" only if Edward wants stricter gating (kids' app leans forgiving).
 
 ## Open blockers
 _(none)_
@@ -56,8 +57,13 @@ _(none)_
   - Battery: build, lint (clean), format:check, 24 unit (16 prior + 8 new), 18 e2e (15 prior + 3 M6) — all PASS. `verification-shots/M6/`.
   - Independent gate: **PASS**, no blocking findings, no new debt (report `verification-shots/M6/verifier-gate-report.md`). Verifier re-ran the battery.
 
-## Run summary (M0–M6)
-- M0–M2 merged and live on `main`. M3–M6 built + verified, committed on `milestone/M3-flashcards`, awaiting human push + merge.
-- Acceptance ledger: M0–M6 entries all `passes: true` with cited evidence.
-- Cumulative debt: 3 low (M3) + 1 low (M4) = 4 open, all low. M5 and M6 added none. Open blockers: none. (Well under the 5-open / 2-medium+ STOP threshold.)
-- **Remaining in Run A:** M7 Progress/scoring/level-unlock, then M10 packaging (deploy + APK — human-driven). See `tweetalig-v2/RESUME_Claude_executor.md`.
+- **M7 Progress/scoring/level-unlock — independent Verifier PASS; committed on `milestone/M3-flashcards`, awaiting human push+merge (2026-07-24).**
+  - Executor: Claude (Cowork). `src/storage/progress.ts` (Preferences-backed, key `tweetalig-progress`): best-score-only per direction+lesson+game; `isLevelUnlocked` (level 1 always; level N when avg of played prior-level lesson-bests ≥40, per direction); `starFor` 🥉50/🥈70/⭐90; corrupt-store guard on read. Wired into App (load/save), LessonSelect (real locks), Home (progress summary), Results (star badge).
+  - Battery: build, lint (clean), format:check, 38 unit (24 prior + 14 new), 20 e2e (18 prior + 2 M7) — all PASS. `verification-shots/M7/`.
+  - Independent gate: **PASS**, no blocking findings; one low design note (M7-note-1, unlock leniency). Verifier re-ran the battery and confirmed the M2 fresh-install-locked invariant still holds. Report `verification-shots/M7/verifier-gate-report.md`.
+
+## Run summary (M0–M7) — Run A feature build COMPLETE
+- M0–M2 merged and live on `main`. **M3–M7 all built + independently verified (PASS)**, committed on `milestone/M3-flashcards`, awaiting human push + merge. The four games + the progress/scoring/unlock loop are done.
+- Acceptance ledger: M0–M7 entries all `passes: true` with cited evidence. (M8/M9 = Run B delight layer; M10 = packaging — both untouched.)
+- Cumulative debt: 3 low (M3) + 1 low (M4) + 1 low design note (M7) = 5 open, all low, none medium+. At the 5-open advisory line but zero medium+ — no STOP required; worth a glance at triage before Run B.
+- **Only remaining in Run A:** M10 packaging — deploy web to a free static host + build/sign an APK in Android Studio and confirm a full lesson in airplane mode. **Human-driven** (`needs-human-check`): Edward makes the hosting account and runs the Android build; Claude can do the Playwright load of the live URL and record results. See `tweetalig-v2/RESUME_Claude_executor.md`.
