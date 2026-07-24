@@ -18,6 +18,7 @@ import Home from "./screens/Home";
 import LessonSelect from "./screens/LessonSelect";
 import Results from "./screens/Results";
 import { getPlayerName } from "./storage/player-name";
+import { getProgress, saveScore, type ProgressMap } from "./storage/progress";
 
 const audioTestLesson = lessons[0];
 type Screen = "home" | "lessons" | "games" | "game" | "results";
@@ -105,12 +106,19 @@ function LearningApp() {
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [selectedGame, setSelectedGame] = useState<GameId>("flashcards");
   const [resultScore, setResultScore] = useState(0);
+  const [progress, setProgress] = useState<ProgressMap>({});
 
   useEffect(() => {
     void getPlayerName()
       .then(setPlayerName)
       .catch(() => setPlayerName(null))
       .finally(() => setIsLoadingName(false));
+  }, []);
+
+  useEffect(() => {
+    void getProgress()
+      .then(setProgress)
+      .catch(() => setProgress({}));
   }, []);
 
   if (isLoadingName) {
@@ -134,6 +142,7 @@ function LearningApp() {
           setSelectedLesson(lesson);
           setScreen("games");
         }}
+        progress={progress}
       />
     );
   }
@@ -160,6 +169,9 @@ function LearningApp() {
         lesson={selectedLesson}
         onComplete={(score) => {
           setResultScore(score);
+          void saveScore(direction, selectedLesson.id, selectedGame, score)
+            .then(setProgress)
+            .catch(() => {});
           setScreen("results");
         }}
         onExit={() => setScreen("games")}
@@ -184,6 +196,7 @@ function LearningApp() {
       playerName={playerName}
       onContinue={() => setScreen("lessons")}
       onNameSaved={setPlayerName}
+      progress={progress}
     />
   );
 }

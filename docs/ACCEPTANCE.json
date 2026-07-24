@@ -47,11 +47,11 @@
       { "id": "M6-3", "text": "Round completes to Results with score; both directions; no console errors", "passes": true, "evidence": "tests/e2e/spell-it.spec.ts (M6-3 'Score 100 out of 100' en-af + af-en + errors.toEqual([])); verification-shots/M6/M6-3-results.png; verification-shots/M6/M6-3-af-en.png; verification-shots/M6/verify.txt" }
     ],
     "M7": [
-      { "id": "M7-1", "text": "Unit tests: best-score-increases-only; unlock >=40; stars 50/70/90", "passes": false, "evidence": "" },
-      { "id": "M7-2", "text": "Scoring >=40 on Level 1 unlocks Level 2 after reload (Playwright)", "passes": false, "evidence": "" },
-      { "id": "M7-3", "text": "Results shows correct star at threshold (screenshots)", "passes": false, "evidence": "" },
-      { "id": "M7-4", "text": "Progress survives restart (reload test)", "passes": false, "evidence": "" },
-      { "id": "M7-5", "text": "No console errors", "passes": false, "evidence": "" }
+      { "id": "M7-1", "text": "Unit tests: best-score-increases-only; unlock >=40; stars 50/70/90", "passes": true, "evidence": "src/storage/progress.ts (mergeBest/isLevelUnlocked/starFor); tests/unit/progress.test.ts (best-only+clamp; unlock 39 locked/40 unlocked+direction-specific; starFor 49/50/69/70/89/90); verification-shots/M7/verify.txt" },
+      { "id": "M7-2", "text": "Scoring >=40 on Level 1 unlocks Level 2 after reload (Playwright)", "passes": true, "evidence": "tests/e2e/progress.spec.ts (M7-2 play Colors→reload→Continue→'Body Parts to Liggaamsdele' toBeEnabled); verification-shots/M7/M7-2-level2-unlocked.png (Level 2 Open, Level 3 Locked); verification-shots/M7/verify.txt" },
+      { "id": "M7-3", "text": "Results shows correct star at threshold (screenshots)", "passes": true, "evidence": "src/screens/Results.tsx (starFor badge); tests/e2e/progress.spec.ts (M7-3 Gold@100/Silver@75/Bronze@50); verification-shots/M7/M7-3-gold.png; verification-shots/M7/M7-3-silver.png; verification-shots/M7/M7-3-bronze.png" },
+      { "id": "M7-4", "text": "Progress survives restart (reload test)", "passes": true, "evidence": "src/storage/progress.ts (Preferences); tests/e2e/progress.spec.ts (M7-4 reload→home-progress contains 'practised'); verification-shots/M7/M7-4-home-progress.png; verification-shots/M7/verify.txt" },
+      { "id": "M7-5", "text": "No console errors", "passes": true, "evidence": "tests/e2e/progress.spec.ts (both tests assert errors.toEqual([])); verification-shots/M7/verify.txt" }
     ],
     "M10": [
       { "id": "M10-1", "text": "Real browser load of the DEPLOYED URL renders Home with zero page errors, origin asserted", "passes": false, "evidence": "" },

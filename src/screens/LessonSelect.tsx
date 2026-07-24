@@ -1,19 +1,29 @@
-import { lessons, type Direction, type Lesson } from "../data/lessons";
+import {
+  gameModes,
+  lessons,
+  type Direction,
+  type GameId,
+  type Lesson,
+} from "../data/lessons";
+import { isLevelUnlocked, type ProgressMap } from "../storage/progress";
 
 interface LessonSelectProps {
   direction: Direction;
   onChangeDirection: (direction: Direction) => void;
   onHome: () => void;
   onSelectLesson: (lesson: Lesson) => void;
+  progress: ProgressMap;
 }
 
 const levels = [1, 2, 3] as const;
+const gameIds: GameId[] = gameModes.map((mode) => mode.id);
 
 export default function LessonSelect({
   direction,
   onChangeDirection,
   onHome,
   onSelectLesson,
+  progress,
 }: LessonSelectProps) {
   return (
     <main className="min-h-screen bg-amber-50 px-5 py-8 text-slate-900">
@@ -74,7 +84,13 @@ export default function LessonSelect({
 
         <div className="mt-7 space-y-8">
           {levels.map((level) => {
-            const isUnlocked = level === 1;
+            const isUnlocked = isLevelUnlocked(
+              progress,
+              direction,
+              level,
+              lessons,
+              gameIds,
+            );
             const levelLessons = lessons.filter(
               (lesson) => lesson.level === level,
             );
