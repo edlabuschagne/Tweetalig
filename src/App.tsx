@@ -6,7 +6,12 @@ import {
   playWord,
   type AudioLanguage,
 } from "./audio/player";
-import { lessons, type Direction, type Lesson } from "./data/lessons";
+import {
+  lessons,
+  type Direction,
+  type GameId,
+  type Lesson,
+} from "./data/lessons";
 import GamePlay from "./screens/GamePlay";
 import GameSelect from "./screens/GameSelect";
 import Home from "./screens/Home";
@@ -98,6 +103,7 @@ function LearningApp() {
   const [isLoadingName, setIsLoadingName] = useState(true);
   const [direction, setDirection] = useState<Direction>("en-af");
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
+  const [selectedGame, setSelectedGame] = useState<GameId>("flashcards");
   const [resultScore, setResultScore] = useState(0);
 
   useEffect(() => {
@@ -138,7 +144,10 @@ function LearningApp() {
         direction={direction}
         lesson={selectedLesson}
         onBack={() => setScreen("lessons")}
-        onSelectFlashcards={() => setScreen("game")}
+        onSelectGame={(game) => {
+          setSelectedGame(game);
+          setScreen("game");
+        }}
       />
     );
   }
@@ -147,6 +156,7 @@ function LearningApp() {
     return (
       <GamePlay
         direction={direction}
+        game={selectedGame}
         lesson={selectedLesson}
         onComplete={(score) => {
           setResultScore(score);

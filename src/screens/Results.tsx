@@ -38,7 +38,7 @@ export default function Results({
           <span className="font-bold text-emerald-800">out of 100</span>
         </div>
         <p className="mt-5 text-slate-700">
-          You completed every flashcard in this lesson.
+          You finished this round. Great effort!
         </p>
         <div className="mt-7 grid gap-3 sm:grid-cols-2">
           <button

@@ -3,7 +3,9 @@
 > Session state, refreshed at every milestone end. The human's batch-review artifact. Read this at the start of every session.
 
 ## Current state
-- **Status:** M0–M2 merged to `main` and pushed (github.com/edlabuschagne/Tweetalig). **M3 Flashcards** built, full battery green (Windows + fresh Linux), independent Verifier **PASS-WITH-NOTES**, and committed on branch `milestone/M3-flashcards` (commit `feat: add M3 Flashcards game` + docs commit). **Awaiting human push + merge.**
+- **Status:** M0–M2 merged to `main` and pushed (github.com/edlabuschagne/Tweetalig). **M3 Flashcards** and **M4 Listen & Choose** built, full battery green (fresh Linux rig), independent Verifier PASS, and committed on branch `milestone/M3-flashcards`. **Awaiting human push + merge.** M5–M7 not yet started (context boundary — resume in a fresh session; see the resume block in the project doc `tweetalig-v2/RESUME_Claude_executor.md`).
+- **Branch `milestone/M3-flashcards` commits (ahead of main):** `feat: add M3 Flashcards game`, `docs: record M3 Verifier`, `feat: add M4 Listen & Choose`, `docs: record M4 Verifier`. Push this branch and open ONE PR into main (5 commits incl. M3+M4); or cherry-review per commit.
+- **Cleanup for the human (bridge can't delete):** in the repo root, delete the throwaway folder `_to_delete/` and stray files `_wtest.txt`, `_dtest/`. Also harmless orphaned `tmp_obj_*` files may sit in `.git/objects/**` (a `git gc` clears them). None are tracked/committed.
 - **Executor change (2026-07-24):** Codex usage was exhausted; the executor is now **Claude (Cowork)**. Claude has direct file/shell tools + a desktop bridge to the local repo at `C:\Projects\Tweetalig`. Build/test runs in a Linux cloud rig (the bridge VM can't run the Windows-native toolchain); verified source is written back to the local repo over the bridge; **the human does every `git push` and PR merge** (no credentials leave the machine).
 - **Next action (human):** push `milestone/M3-flashcards` and open/merge its PR (M3 is a `needs-human-check` gate; feel already approved from screenshots). Then Claude continues M4→M7 on the same branch.
 - **Run plan:** Run A = M0–M7 + M10 (learning app + packaging). Run B = M8–M9 (delight layer). Current run: **M3 → M7** (stop on any FAIL or the next human-check gate, which is M10 packaging).
@@ -35,7 +37,14 @@ _(none)_
   - Scope/security: no other games, no delight layer, no new dependency, no backend/network/TTS. npm audit clean.
   - Independent gate: **PASS-WITH-NOTES** (3 low-severity cosmetic notes above, no blocking findings). Report: `verification-shots/M3/verifier-gate-report.md`. Human approved the feel from screenshots.
 
-## Run summary (M0–M3)
-- M0–M2 merged and live on `main`. M3 built + verified, committed, awaiting human merge.
-- Acceptance ledger: M0–M3 entries all `passes: true` with cited evidence.
-- Cumulative debt: 3 low-severity cosmetic notes. Open blockers: none.
+- **M4 Listen & Choose — independent Verifier PASS; committed on `milestone/M3-flashcards`, awaiting human push+merge (2026-07-24).**
+  - Executor: Claude (Cowork). Hear the target word (gesture-safe auto-focused "Hear the word" button), pick from 4 shuffled choices (correct + 3 lesson distractors); correct→positive, wrong→corrective feedback revealing the answer; score = round(correct/total×100) to Results.
+  - Shared-pattern changes (additive, M3 regression green): `GameShell` optional `unitLabel`; `GameSelect` launches any game in `builtGames`; `GamePlay` dispatches by `GameId`; `App` tracks `selectedGame`; `Results` completion line game-neutral.
+  - Battery: build, lint, format:check, 16 unit, 12 e2e — all PASS. `verification-shots/M4/`. Hardened a Home loading-race flake; 3× stable.
+  - Independent gate: **PASS** (report `verification-shots/M4/verifier-gate-report.md`).
+
+## Run summary (M0–M4)
+- M0–M2 merged and live on `main`. M3 + M4 built + verified, committed on `milestone/M3-flashcards`, awaiting human push + merge.
+- Acceptance ledger: M0–M4 entries all `passes: true` with cited evidence.
+- Cumulative debt: 3 low-severity cosmetic notes (all M3). Open blockers: none.
+- **Remaining in Run A:** M5 Match Pairs, M6 Spell It, M7 Progress/scoring/level-unlock, then M10 packaging (deploy + APK — human-driven). See `tweetalig-v2/RESUME_Claude_executor.md`.

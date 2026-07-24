@@ -6,6 +6,7 @@ interface GameShellProps {
   lessonLabel: string;
   onExit: () => void;
   total: number;
+  unitLabel?: string;
 }
 
 export default function GameShell({
@@ -14,6 +15,7 @@ export default function GameShell({
   lessonLabel,
   onExit,
   total,
+  unitLabel = "Card",
 }: GameShellProps) {
   return (
     <main className="min-h-screen bg-gradient-to-b from-cyan-100 to-amber-50 px-5 py-6 text-slate-900">
@@ -31,13 +33,13 @@ export default function GameShell({
           </div>
           <div className="mt-3 flex items-center gap-3">
             <progress
-              aria-label={`Round progress: card ${current} of ${total}`}
+              aria-label={`Round progress: ${unitLabel.toLowerCase()} ${current} of ${total}`}
               className="h-3 flex-1 accent-cyan-700"
               max={total}
               value={current}
             />
             <p className="whitespace-nowrap text-sm font-bold">
-              Card {current} of {total}
+              {unitLabel} {current} of {total}
             </p>
           </div>
         </header>

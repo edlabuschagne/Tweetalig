@@ -32,9 +32,9 @@
       { "id": "M3-5", "text": "No console errors", "passes": true, "evidence": "tests/e2e/flashcards.spec.ts (trackPageErrors errors.toEqual([])); verification-shots/M3/verify.txt" }
     ],
     "M4": [
-      { "id": "M4-1", "text": "Word plays on start/replay; choices render (screenshot)", "passes": false, "evidence": "" },
-      { "id": "M4-2", "text": "Correct advances with positive feedback; wrong shows corrective feedback (screenshot both)", "passes": false, "evidence": "" },
-      { "id": "M4-3", "text": "Round completes to Results with score; both directions; no console errors", "passes": false, "evidence": "" }
+      { "id": "M4-1", "text": "Word plays on start/replay; choices render (screenshot)", "passes": true, "evidence": "src/games/ListenChoose.tsx (hearWord + 4 choices); tests/e2e/listen-choose.spec.ts (M4-1 toHaveCount(4) + waitForResponse /audio/af/rooi.mp3); verification-shots/M4/M4-1-question.png; verification-shots/M4/verify.txt" },
+      { "id": "M4-2", "text": "Correct advances with positive feedback; wrong shows corrective feedback (screenshot both)", "passes": true, "evidence": "src/games/ListenChoose.tsx (choose + feedback); tests/e2e/listen-choose.spec.ts (M4-2 'Correct' and 'the answer is Rooi'); verification-shots/M4/M4-2-correct.png; verification-shots/M4/M4-2-wrong.png; verification-shots/M4/verify.txt" },
+      { "id": "M4-3", "text": "Round completes to Results with score; both directions; no console errors", "passes": true, "evidence": "tests/e2e/listen-choose.spec.ts (M4-3 8-question 'Score 100 out of 100' + af-en /audio/en/red.mp3 + errors.toEqual([])); verification-shots/M4/M4-3-results.png; verification-shots/M4/M4-3-af-en.png; verification-shots/M4/verify.txt" }
     ],
     "M5": [
       { "id": "M5-1", "text": "Correct pair locks as matched (screenshot before/after)", "passes": false, "evidence": "" },

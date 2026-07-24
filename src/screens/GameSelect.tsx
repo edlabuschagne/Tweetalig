@@ -1,17 +1,25 @@
-import { gameModes, type Direction, type Lesson } from "../data/lessons";
+import {
+  gameModes,
+  type Direction,
+  type GameId,
+  type Lesson,
+} from "../data/lessons";
+
+// Games with a playable implementation. Extended one milestone at a time.
+const builtGames: GameId[] = ["flashcards", "listen"];
 
 interface GameSelectProps {
   direction: Direction;
   lesson: Lesson;
   onBack: () => void;
-  onSelectFlashcards: () => void;
+  onSelectGame: (game: GameId) => void;
 }
 
 export default function GameSelect({
   direction,
   lesson,
   onBack,
-  onSelectFlashcards,
+  onSelectGame,
 }: GameSelectProps) {
   const lessonLabel =
     direction === "en-af"
@@ -33,7 +41,7 @@ export default function GameSelect({
           Choose a game
         </h1>
         <p className="mt-2 text-slate-700">
-          These game adventures unlock in the next milestones.
+          Pick how you want to practise these words.
         </p>
 
         <div
@@ -41,6 +49,7 @@ export default function GameSelect({
           className="mt-7 grid gap-4 sm:grid-cols-2"
         >
           {gameModes.map((game) => {
+            const isBuilt = builtGames.includes(game.id);
             const content = (
               <>
                 <span aria-hidden="true" className="text-4xl">
@@ -49,18 +58,18 @@ export default function GameSelect({
                 <h2 className="mt-3 text-xl font-black">{game.name}</h2>
                 <p className="mt-1 text-slate-600">{game.description}</p>
                 <p className="mt-3 text-sm font-bold text-violet-700">
-                  {game.id === "flashcards" ? "▶ Play now" : "Coming next"}
+                  {isBuilt ? "▶ Play now" : "Coming next"}
                 </p>
               </>
             );
 
-            return game.id === "flashcards" ? (
+            return isBuilt ? (
               <button
-                aria-label="Play Flashcards"
+                aria-label={`Play ${game.name}`}
                 className="min-h-36 rounded-2xl border-2 border-violet-300 bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-violet-900"
                 data-testid="game-tile"
                 key={game.id}
-                onClick={onSelectFlashcards}
+                onClick={() => onSelectGame(game.id)}
                 type="button"
               >
                 {content}
