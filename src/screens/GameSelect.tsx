@@ -6,7 +6,7 @@ import {
 } from "../data/lessons";
 
 // Games with a playable implementation. Extended one milestone at a time.
-const builtGames: GameId[] = ["flashcards", "listen"];
+const builtGames: GameId[] = ["flashcards", "listen", "match", "spell"];
 
 interface GameSelectProps {
   direction: Direction;

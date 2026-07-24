@@ -1,25 +1,57 @@
 import { useState, type FormEvent } from "react";
 
 import {
+  gameModes,
+  lessons,
+  type Direction,
+  type GameId,
+} from "../data/lessons";
+import {
   playerNameMaxLength,
   savePlayerName,
   validatePlayerName,
 } from "../storage/player-name";
+import {
+  isLevelUnlocked,
+  lessonsPracticed,
+  type ProgressMap,
+} from "../storage/progress";
 
 interface HomeProps {
   playerName: string | null;
   onContinue: () => void;
   onNameSaved: (name: string) => void;
+  progress: ProgressMap;
 }
+
+const gameIds: GameId[] = gameModes.map((mode) => mode.id);
+const directions: Direction[] = ["en-af", "af-en"];
+const allLevels = [1, 2, 3] as const;
 
 export default function Home({
   playerName,
   onContinue,
   onNameSaved,
+  progress,
 }: HomeProps) {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+
+  const practiced = lessonsPracticed(progress, directions, lessons, gameIds);
+  const highestLevel = allLevels.reduce(
+    (highest, level) =>
+      directions.some((direction) =>
+        isLevelUnlocked(progress, direction, level, lessons, gameIds),
+      )
+        ? level
+        : highest,
+    1,
+  );
+  const progressSummary =
+    practiced === 0
+      ? "🔓 Level 1 ready · 10 lessons to explore"
+      : `🔓 Level${highestLevel > 1 ? "s 1–" + highestLevel : " 1"} open · ${practiced} lesson${practiced === 1 ? "" : "s"} practised`;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -66,8 +98,8 @@ export default function Home({
               className="mt-5 rounded-2xl border-2 border-sky-200 bg-sky-50 p-5"
             >
               <p className="font-bold text-sky-950">Your learning path</p>
-              <p className="mt-1 text-slate-700">
-                🔓 Level 1 ready · 10 lessons to explore
+              <p className="mt-1 text-slate-700" data-testid="home-progress">
+                {progressSummary}
               </p>
             </section>
             <button

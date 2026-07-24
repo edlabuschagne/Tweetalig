@@ -1,0 +1,19 @@
+M6 Spell It — cloud rig verification
+Date: 2026-07-24T08:57:25Z
+
+Battery (all commands actually run):
+  build       : PASS
+  lint        : PASS (0 errors, 0 warnings)
+  format:check: PASS
+  unit        : PASS (vitest — 24 tests: 16 prior + 8 new spell-check tests)
+  e2e         : PASS (playwright — 18 tests: M0–M5 regression + 3 M6)
+
+M6 tests:
+  M6-1 unit  : tests/unit/spell-check.test.ts (accent/case/whitespace/phrase; empty rejected)
+  M6-1 e2e   : Animals Bird->Voël typed 'Voel' (no accent) -> Correct  -> M6-1-accent-correct.png
+  M6-2 e2e   : Red typed 'xyz' -> reveals 'it’s spelled “Rooi”' -> M6-2-wrong.png
+  M6-3 e2e   : Colors all-correct -> Results 100/100 both directions -> M6-3-results.png, M6-3-af-en.png
+
+Checker: src/games/spell-check.ts normalizeSpelling (lowercase, fold accents, drop apostrophes,
+  strip non-letter/space, collapse whitespace, trim); keeps spaces for multi-word phrases.
+Input guard (Check 5): maxLength=40, empty submit ignored, submit disabled while empty.

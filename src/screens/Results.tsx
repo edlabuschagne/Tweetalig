@@ -1,4 +1,11 @@
 import type { Direction, Lesson } from "../data/lessons";
+import { starFor } from "../storage/progress";
+
+const starLabels: Record<string, string> = {
+  "🥉": "Bronze star",
+  "🥈": "Silver star",
+  "⭐": "Gold star",
+};
 
 interface ResultsProps {
   direction: Direction;
@@ -20,6 +27,9 @@ export default function Results({
       ? `${lesson.title} → ${lesson.titleAf}`
       : `${lesson.titleAf} → ${lesson.title}`;
 
+  const star = starFor(score);
+  const starLabel = star ? starLabels[star] : null;
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-emerald-100 to-amber-50 px-5 py-10 text-slate-900">
       <section className="mx-auto max-w-xl rounded-3xl bg-white p-8 text-center shadow-lg">
@@ -37,7 +47,25 @@ export default function Results({
           <span className="text-6xl font-black text-emerald-900">{score}</span>
           <span className="font-bold text-emerald-800">out of 100</span>
         </div>
-        <p className="mt-5 text-slate-700">
+        {star ? (
+          <p
+            className="mt-5 text-xl font-black text-emerald-900"
+            data-testid="results-star"
+          >
+            <span aria-hidden="true" className="text-3xl">
+              {star}
+            </span>{" "}
+            {starLabel}!
+          </p>
+        ) : (
+          <p
+            className="mt-5 font-bold text-slate-700"
+            data-testid="results-star"
+          >
+            Keep practising — you’ll earn a star next time!
+          </p>
+        )}
+        <p className="mt-3 text-slate-700">
           You finished this round. Great effort!
         </p>
         <div className="mt-7 grid gap-3 sm:grid-cols-2">

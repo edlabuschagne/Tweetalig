@@ -1,0 +1,18 @@
+M5 Match Pairs — cloud rig verification
+Date: 2026-07-24T08:37:38Z
+Rig: /home/claude/tw (npm ci Linux node_modules; playwright.cloud.config.ts, chromium-1194, --no-sandbox)
+
+Battery (all commands actually run):
+  build       : PASS (tsc --noEmit && vite build)
+  lint        : PASS (eslint ., 0 errors 0 warnings)
+  format:check: PASS
+  unit        : PASS (vitest run — 16 tests)
+  e2e         : PASS (playwright — 15 tests: M0/M1/M2/M3/M4 regression + M5)
+
+M5 e2e (tests/e2e/match-pairs.spec.ts):
+  M5-1 locks a correct pair as matched      -> M5-1-before.png, M5-1-after.png
+  M5-2 resets a mismatched pair             -> M5-2-mismatch.png
+  M5-3 all pairs -> Results, both directions-> M5-3-results.png, M5-3-af-en.png
+
+Score model: round(pairCount / (pairCount + mismatches) * 100); flawless round = 100.
+Regression: 12 prior e2e + 16 unit unchanged and green.
