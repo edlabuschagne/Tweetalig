@@ -37,9 +37,9 @@
       { "id": "M4-3", "text": "Round completes to Results with score; both directions; no console errors", "passes": true, "evidence": "tests/e2e/listen-choose.spec.ts (M4-3 8-question 'Score 100 out of 100' + af-en /audio/en/red.mp3 + errors.toEqual([])); verification-shots/M4/M4-3-results.png; verification-shots/M4/M4-3-af-en.png; verification-shots/M4/verify.txt" }
     ],
     "M5": [
-      { "id": "M5-1", "text": "Correct pair locks as matched (screenshot before/after)", "passes": false, "evidence": "" },
-      { "id": "M5-2", "text": "Mismatched pair resets (screenshot)", "passes": false, "evidence": "" },
-      { "id": "M5-3", "text": "All pairs matched to Results with score; both directions; no console errors", "passes": false, "evidence": "" }
+      { "id": "M5-1", "text": "Correct pair locks as matched (screenshot before/after)", "passes": true, "evidence": "src/games/MatchPairs.tsx (matched Set + disabled/✓ locked tiles); tests/e2e/match-pairs.spec.ts (M5-1 toBeDisabled + toContainText ✓); verification-shots/M5/M5-1-before.png; verification-shots/M5/M5-1-after.png; verification-shots/M5/verify.txt" },
+      { "id": "M5-2", "text": "Mismatched pair resets (screenshot)", "passes": true, "evidence": "src/games/MatchPairs.tsx (wrongPicks clears on next tap, tiles stay enabled); tests/e2e/match-pairs.spec.ts (M5-2 'Not a match' + both tiles toBeEnabled); verification-shots/M5/M5-2-mismatch.png; verification-shots/M5/verify.txt" },
+      { "id": "M5-3", "text": "All pairs matched to Results with score; both directions; no console errors", "passes": true, "evidence": "tests/e2e/match-pairs.spec.ts (M5-3 'Score 100 out of 100' en-af + af-en Kleure→Colors + errors.toEqual([])); verification-shots/M5/M5-3-results.png; verification-shots/M5/M5-3-af-en.png; verification-shots/M5/verify.txt" }
     ],
     "M6": [
       { "id": "M6-1", "text": "Accent-insensitive correct answer scores positive (unit test on checker + screenshot)", "passes": false, "evidence": "" },
