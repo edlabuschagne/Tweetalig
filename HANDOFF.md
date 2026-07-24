@@ -3,8 +3,8 @@
 > Session state, refreshed at every milestone end. The human's batch-review artifact. Read this at the start of every session.
 
 ## Current state
-- **Status:** M0–M2 merged to `main` and pushed (github.com/edlabuschagne/Tweetalig). **M3 Flashcards** and **M4 Listen & Choose** built, full battery green (fresh Linux rig), independent Verifier PASS, and committed on branch `milestone/M3-flashcards`. **Awaiting human push + merge.** M5–M7 not yet started (context boundary — resume in a fresh session; see the resume block in the project doc `tweetalig-v2/RESUME_Claude_executor.md`).
-- **Branch `milestone/M3-flashcards` commits (ahead of main):** `feat: add M3 Flashcards game`, `docs: record M3 Verifier`, `feat: add M4 Listen & Choose`, `docs: record M4 Verifier`. Push this branch and open ONE PR into main (5 commits incl. M3+M4); or cherry-review per commit.
+- **Status:** M0–M2 merged to `main` and pushed (github.com/edlabuschagne/Tweetalig). **M3 Flashcards**, **M4 Listen & Choose**, and **M5 Match Pairs** built, full battery green (fresh Linux rig), independent Verifier PASS, and committed on branch `milestone/M3-flashcards`. **Awaiting human push + merge.** M6–M7 not yet started (see the resume block in the project doc `tweetalig-v2/RESUME_Claude_executor.md`).
+- **Branch `milestone/M3-flashcards` commits (ahead of main):** `feat: add M3 Flashcards game`, `docs: record M3 Verifier`, `feat: add M4 Listen & Choose`, `docs: record M4 Verifier`, `feat: add M5 Match Pairs game`, `docs: record M5 Verifier`. Push this branch and open ONE PR into main; or cherry-review per commit.
 - **Cleanup for the human (bridge can't delete):** in the repo root, delete the throwaway folder `_to_delete/` and stray files `_wtest.txt`, `_dtest/`. Also harmless orphaned `tmp_obj_*` files may sit in `.git/objects/**` (a `git gc` clears them). None are tracked/committed.
 - **Executor change (2026-07-24):** Codex usage was exhausted; the executor is now **Claude (Cowork)**. Claude has direct file/shell tools + a desktop bridge to the local repo at `C:\Projects\Tweetalig`. Build/test runs in a Linux cloud rig (the bridge VM can't run the Windows-native toolchain); verified source is written back to the local repo over the bridge; **the human does every `git push` and PR merge** (no credentials leave the machine).
 - **Next action (human):** push `milestone/M3-flashcards` and open/merge its PR (M3 is a `needs-human-check` gate; feel already approved from screenshots). Then Claude continues M4→M7 on the same branch.
@@ -44,8 +44,14 @@ _(none)_
   - Battery: build, lint, format:check, 16 unit, 12 e2e — all PASS. `verification-shots/M4/`. Hardened a Home loading-race flake; 3× stable.
   - Independent gate: **PASS** (report `verification-shots/M4/verifier-gate-report.md`).
 
-## Run summary (M0–M4)
-- M0–M2 merged and live on `main`. M3 + M4 built + verified, committed on `milestone/M3-flashcards`, awaiting human push + merge.
-- Acceptance ledger: M0–M4 entries all `passes: true` with cited evidence.
-- Cumulative debt: 3 low-severity cosmetic notes (all M3). Open blockers: none.
-- **Remaining in Run A:** M5 Match Pairs, M6 Spell It, M7 Progress/scoring/level-unlock, then M10 packaging (deploy + APK — human-driven). See `tweetalig-v2/RESUME_Claude_executor.md`.
+- **M5 Match Pairs — independent Verifier PASS; committed on `milestone/M3-flashcards`, awaiting human push+merge (2026-07-24).**
+  - Executor: Claude (Cowork). Two-column tap-to-pair grid (6 pairs, first 6 lesson words, columns shuffled independently). Tap a "from" word then its "to" match → both lock emerald with aria-hidden ✓ and disable; mismatch flags both red with ✗ + "Not a match — try again" and clears on the next tap (no timers — deterministic). Score = round(pairCount/(pairCount+mismatches)×100) to Results; both directions.
+  - Files: `src/games/MatchPairs.tsx` (new); `GamePlay` `case "match"`; `GameSelect` builtGames += `"match"`. No audio/network (not required by any criterion — leaner than M3/M4).
+  - Battery: build, lint (0 warnings after removing two redundant eslint-disables), format:check, 16 unit, 15 e2e (12 prior regression + 3 new M5) — all PASS. `verification-shots/M5/`.
+  - Independent gate: **PASS**, no blocking findings, no new debt (report `verification-shots/M5/verifier-gate-report.md`). Verifier re-ran the battery itself.
+
+## Run summary (M0–M5)
+- M0–M2 merged and live on `main`. M3 + M4 + M5 built + verified, committed on `milestone/M3-flashcards`, awaiting human push + merge.
+- Acceptance ledger: M0–M5 entries all `passes: true` with cited evidence.
+- Cumulative debt: 3 low-severity cosmetic notes (M3) + 1 low (M4) = 4 open, all low. M5 added none. Open blockers: none. (Budget: well under the 5-open / 2-medium+ STOP threshold.)
+- **Remaining in Run A:** M6 Spell It, M7 Progress/scoring/level-unlock, then M10 packaging (deploy + APK — human-driven). See `tweetalig-v2/RESUME_Claude_executor.md`.
